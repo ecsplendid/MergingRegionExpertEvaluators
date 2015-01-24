@@ -19,7 +19,7 @@ classdef region_model
         loss
         complosses
         predictions
-        truncate % truncate at this number of records i.e. 6000
+        truncate = 4000 % truncate at this number of records i.e. 6000
         weights
     end
     
