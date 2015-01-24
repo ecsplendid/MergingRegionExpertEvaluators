@@ -24,53 +24,50 @@ catch ex
     rethrow(ex);
 end
 
-lags = floor(linspace( maxlag_timehorizon, 0, num_expertevaulators ));
+lags = floor( ...
+        linspace( ...
+            maxlag_timehorizon, 0, num_expertevaulators ...
+            ) );
 
 preds = nan( size(data,2), num_expertevaulators );
 losses = nan( size(data,2), num_expertevaulators );
 
 for t = window_size+1:size(data,2)
     
+	index = 1;
+     
     % here U is the chol factor of aI + K, where
     % K is the kernelmatrix of the window_size many samples just before t.
     
     train_window = data(:, t-window_size:t-1);
     train_labels = labels(t-window_size:t-1)';
     
-    index = 1;
-    
-    % now for this model, make predictions at points in the future
-    % depending on the lags variable
-    % lags is going from HIGH to 0, so that k remains as it was for chol
-    % update
-    for l=1:length(lags)
+    % matlab knows how to do substitutions on triangular matrices.
+    inv_part = (U \ (U' \ train_labels))';
 
+    for l=1:length(lags)
+    
         lag = lags(l);
         
         % need a break condition, if t+lag>N
         if (lag + t) > size(data,2), continue, end;
         
         k = kernel(train_window,data(:,t+lag))';
-
-        % matlab knows how to do substitutions on triangular matrices.
-        inv_part = (U \ (U' \ train_labels))';
-
         y = inv_part * k;
-        
         preds(t+lag, num_expertevaulators-l+1 ) = y;
         losses(t+lag, num_expertevaulators-l+1 ) = (y-labels(t+lag))^2;
-    
-        index = index + 1;
         
     end
     
+    index = index + 1;
+        
     % Cholesky factor update
     % grow REMEMBER THAT k needs to end up effective for t
     y = U' \ k;
     z = sqrt(ridge_coeff + kernel(data(:,t), data(:,t)) - y'*y);
     Wm = [ U y ; zeros(1,window_size) z];
-    % shrink
     
+    % shrink
     y = Wm(1,2:end);
     U = cholupdate(Wm(2:end,2:end), y');
 end
