@@ -1,6 +1,4 @@
-%function [ P ] = GetPredictionMatrix( )
-%GETPREDICTIONMATRIX Summary of this function goes here
-%   Detailed explanation goes here
+%todo: come back to this, dont run, doesnt work (trs@140115)
 
 %clear all;
 

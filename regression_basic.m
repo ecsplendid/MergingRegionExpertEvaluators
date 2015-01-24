@@ -1,4 +1,8 @@
-function [preds losses] = regression(data, labels, kernel, window_size, a)
+function [preds, losses] = regression_basic(...
+    data, labels, kernel, window_size, a)
+%regression_basic perform sliding window kernel ridge regression,
+%using the Cholesky factor update so it runs in linear time (FAST), returns
+%predictions and square losses
 
 K = zeros(window_size,window_size);
 for i=1:window_size

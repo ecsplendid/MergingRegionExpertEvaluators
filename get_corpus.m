@@ -1,4 +1,4 @@
-function [ corpus, labels ] = get_corpus( ...
+function [ corpus, labels, competitor ] = get_corpus( ...
     corpus_name )
 %get_corpus Load the data from the corpus requestes
 % and normalize it
@@ -22,6 +22,9 @@ labels = raw(:,10)';
 % cap the signals at 1 to remove outliers
 % could later just remove them entirely?
 labels(labels>1) = 1;
+
+% the RTSSE competitor predictions
+competitor = raw(:,11)./100;
 
 end
 
