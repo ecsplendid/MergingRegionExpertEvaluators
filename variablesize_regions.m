@@ -10,7 +10,7 @@ degree = 4;
 
 filename = 'eeru1206';
 
-rawdata = load( [ filename '.csv' ],','  );
+rawdata = load( [ 'Data/' filename '.csv' ],','  );
 
 strikes = rawdata(:,7);
 puts = rawdata(:,8);
@@ -37,8 +37,7 @@ end
 
 kernel = @(x,y) (1 + x'*y).^degree;
 
-window_sizes = [ 200 ];
-window_sizes = [200];
+window_sizes = [ 200 100 50 ];
 lags = [10:60:300];
 
 
@@ -48,7 +47,6 @@ P = nan(R, length(lags) );
 %%
 
 kernel = @(x,y) (1 + x'*y).^degree;
-
 
 for i=1:length(window_sizes)
    
@@ -64,7 +62,6 @@ for i=1:length(window_sizes)
          P( window_size+1:end, L ) = preds;
      
      end
-
 end
 
 [preds losses] = regression( data', volatility_adjusted, ...
@@ -116,9 +113,6 @@ title(filename)
 %legend( 'competitor','our regions algoriothm' )
 
 %% lag test
-
-
-
 
 
 [preds losses] = regression_lagged( data', volatility_adjusted, ...

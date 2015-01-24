@@ -2,16 +2,13 @@
 %GETPREDICTIONMATRIX Summary of this function goes here
 %   Detailed explanation goes here
 
-
-
 %% s
-
-name = 'rts307';
+name = 'eeru1206';
 max_lags = 400;
 degree = 4;
 window_size = 100;
-a = 0.5;
-num_lags = 20;
+a = 2;
+num_lags = 10;
 
 raw = load([name '.csv']);
 % the first line should be removed in advance
@@ -21,11 +18,11 @@ raw = load([name '.csv']);
 % trs @ 2208 new signals
 data = raw(:,[7,8,9,19])';
 
-
 all_losses = nan( size( data, 2 ), 3 );
 % scale
 for r = 1 : size(data, 1)
-    data(r,:) = (data(r,:) - min(data(r,:)))/(max(data(r,:))-min(data(r,:)));
+    data(r,:) = (data(r,:) - ...
+        min(data(r,:))) / (max(data(r,:))-min(data(r,:)));
     data(r,:) = (data(r,:).*2)-1;
 end
 
@@ -47,15 +44,18 @@ labels = labels(1:truncate_limit);
 
 %imagesc(log(L));
 
-[ diffsvs cums losses preds weights_saved_vs ] = run_pwea( P, 0.99999, 2, raw, labels, truncate_limit, window_size  );
+[ diffsvs cums losses preds weights_saved_vs ] = ...
+    run_pwea( P, 0.99999, 2, raw, labels, truncate_limit, window_size  );
 
 all_losses( window_size+1:end, 1 ) = cums;
 
-[ diffsfs cums losses preds weights_saved_fs ] = run_pwea( P, 0.00001, 1, raw, labels, truncate_limit, window_size  );
+[ diffsfs cums losses preds weights_saved_fs ] = ...
+    run_pwea( P, 0.00001, 1, raw, labels, truncate_limit, window_size  );
 
 all_losses( window_size+1:end, 2 ) = cums;
 
-[ diffsaa cums losses preds weights_saved_aa ] = run_pwea( P, 0.00001, 0, raw, labels, truncate_limit, window_size  );
+[ diffsaa cums losses preds weights_saved_aa ] = ...
+    run_pwea( P, 0.00001, 0, raw, labels, truncate_limit, window_size  );
 
 all_losses( window_size+1:end, 3 ) = cums;
 
@@ -74,12 +74,11 @@ hold off;
 grid on;
 axis tight;
 axis square;
-legend('Variable Share \alpha=0.999','Fixed Share \alpha=0.00001','AAS','Location','SouthWest' )
+legend('Variable Share \alpha=0.999', ...
+    'Fixed Share \alpha=0.00001','AAS','Location','SouthWest' )
 xlabel('Record Number')
 ylabel('Cumulative Square Loss')
 title( ['Lagged Region Experts ' name ' (30 Experts)' ] );
 
 %clear all;
-
-
 figure(gcf)
