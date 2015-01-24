@@ -86,6 +86,7 @@ for t = iterations % master loop
     weights = weights./sum(weights);
     
     %assert that weights add up to 1
+    %note, this usually means all the experts are making same predictions
 	assert(abs(sum(weights)-1) < 1e-10);
     
     weights_saved(t,:) = [ weights(awake_expertindexes) ...

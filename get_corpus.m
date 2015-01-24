@@ -1,5 +1,5 @@
 function [ corpus, labels, competitor ] = get_corpus( ...
-    corpus_name )
+    corpus_name, truncate )
 %get_corpus Load the data from the corpus requestes
 % and normalize it
 
@@ -25,6 +25,12 @@ labels(labels>1) = 1;
 
 % the RTSSE competitor predictions
 competitor = raw(:,11)./100;
+
+    if nargin > 1
+        competitor = competitor(1:truncate);
+        labels = labels(1:truncate);
+        corpus = corpus(:,1:truncate);
+    end
 
 end
 
