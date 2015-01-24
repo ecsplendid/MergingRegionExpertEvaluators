@@ -10,24 +10,6 @@ window_size = 700;
 a = 1;
 region_count = 50;
 
-name = 'rts307';
-
-raw = load([name '.csv']);
-% the first line should be removed in advance
-% cannot specify comma-separated format in this version of MATLAB
-% therefore column 7
-
-% trs @ 2208 new signals
-data = raw(:,[7,8,9,19])';
-
-% scale
-for r = 1 : size(data, 1)
-    data(r,:) = (data(r,:) - min(data(r,:)))/(max(data(r,:))-min(data(r,:)));
-    data(r,:) = (data(r,:).*2)-1;
-end
-
-labels = raw(:,10)';
-%labels(labels>1) = 1;
 
 % todo: find best sigma
 kernel = @(X,y,sigma) KPolyVect(X,y,degree);
