@@ -1,6 +1,3 @@
-%function [ P ] = GetPredictionMatrix( )
-%GETPREDICTIONMATRIX Summary of this function goes here
-%   Detailed explanation goes here
 
 %% s
 name = 'eeru1206';
