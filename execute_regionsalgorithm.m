@@ -2,7 +2,7 @@ function [ model ] = execute_regionsalgorithm( model )
 
 tic;
 
-[corpus, labels, competitor] = get_corpus( model.corpus_name, 6000 );
+[corpus, labels, competitor] = get_corpus( model.corpus_name, model.truncate );
 
 kernel = @(X,y) kernel_polynomial(X,y,model.degree);
 window_size = model.window_size;
