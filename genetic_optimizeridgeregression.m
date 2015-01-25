@@ -4,13 +4,13 @@ function [ best_params ] = genetic_optimizeridgeregression( )
 %%
 
 options = gaoptimset;
-options = gaoptimset(options,'PopulationSize', [ 20 ] );
+options = gaoptimset(options,'PopulationSize', [ 100 ] );
 options = gaoptimset(options,'MigrationDirection', 'both');
 options = gaoptimset(options,'MigrationInterval', 3);
 options = gaoptimset(options,'MigrationFraction', 0.3);
-options = gaoptimset(options,'EliteCount', 1);
+options = gaoptimset(options,'EliteCount', 7);
 options = gaoptimset(options,'CrossoverFraction', 0.5);
-options = gaoptimset(options,'Generations', 5);
+options = gaoptimset(options,'Generations', 10);
 options = gaoptimset(options,'StallGenLimit', 5);
 options = gaoptimset(options,'Display', 'iter');
 options = gaoptimset(options,'PlotFcns', {  ...
@@ -25,7 +25,7 @@ best_params = ga( @genetic_optimizeridgeevaluator, ...
     3, ... % num constraints
     [],[],[],[], ...
     [1 1 0.0001], ... % lower
-    [10 450 10], ... % upper
+    [12 450 10], ... % upper
     [], ...
     [1 2], ... % int constraints
     options );
