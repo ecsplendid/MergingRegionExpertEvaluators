@@ -4,10 +4,10 @@ classdef region_model
      
     properties
         corpus_name = 'eeru1206';
-        degree = 7;
+        degree = 6;
         kernel = @(X,y) kernel_polynomial(X,y,degree);
-        window_size = 261;
-        ridge_coeff = 2.9117;
+        window_size = 278;
+        ridge_coeff = 0.6525;
         num_expertevaulators = 50;
         maxlag_timehorizon = 10000;
         AA_mode = 2;
