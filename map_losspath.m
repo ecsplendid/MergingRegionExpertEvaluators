@@ -1,4 +1,4 @@
-function [Losses,Paths] = BestLossPath( L )
+function [Losses,Paths] = map_losspath( L )
 % L is loss matrix
 % for each number of switches, P(i+1) gives you the loss of the best path
 % with i switches (allow zero switches, we have one based indexing)
@@ -51,8 +51,6 @@ end
 [Losses Indices] = min( squeeze( LossPaths( T, :, 1:T-1 ) ),[],2); 
 
 % now create the paths
-
-
 for M=0:T-2
     
     current_guy = Indices(M+1);
@@ -67,6 +65,5 @@ for M=0:T-2
         current_guy = previous_guy;
     end
 end
-
 
 end
