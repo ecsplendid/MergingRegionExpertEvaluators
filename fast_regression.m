@@ -1,4 +1,5 @@
-function losses = regression(data, labels, kernel, kernelParameters, window_size, a)
+function losses = regression( ...
+    data, labels, kernel, kernelParameters, window_size, a)
 
 K = zeros(window_size,window_size);
 for i=1:window_size
