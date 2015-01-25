@@ -1,5 +1,6 @@
 function [score] = genetic_optimizeridgeevaluator( opts )
 
+% 7.0000  261.0000    2.9117
 corpus_name = 'rts1206';
 
 [corpus, labels, ~] = get_corpus( corpus_name, 8000 );
