@@ -28,17 +28,17 @@ for t = window_size+1 : size(data,2)
     k = kernel(data(:, t-window_size:t-1),data(:,t))';
     
     % matlab knows how to do substitutions on triangular matrices.
-    inv_part = (U \ (U' \ labels(t-window_size:t-1)))';
+    inv_part = (U \ (U' \ labels(t-window_size:t-1)'))';
     
     index = t-window_size;
-    y = inv_part * k';
+    y = inv_part * k;
     preds(index)= y;
     losses(index) = (y-labels(t))^2;
     
     % Cholesky factor update
     
     % grow
-    y = U' \ k';
+    y = U' \ k;
     z = sqrt(a + kernel(data(:,t), data(:,t)) - y'*y);
     Wm = [ U y ; zeros(1,window_size) z];
     % shrink

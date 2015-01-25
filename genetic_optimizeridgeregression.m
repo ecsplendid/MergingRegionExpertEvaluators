@@ -1,7 +1,7 @@
-function [ model ] = genetic_optimizeparams( )
-%GENETIC_OPTIMIZEPARAMS Find the best set of parameters to fit a model
+function [ best_params ] = genetic_optimizeridgeregression( )
+%GENETIC_OPTIMIZERIDGEREGRESSION figure out the best parameters for ridge
+%regression on the validation set (rts1206)
 %%
-diary on;
 
 options = gaoptimset;
 options = gaoptimset(options,'PopulationSize', [ 20 ] );
@@ -21,18 +21,14 @@ options = gaoptimset(options,'PlotFcns', {  ...
 options = gaoptimset(options,'Vectorized', 'off');
 options = gaoptimset(options,'UseParallel', 1 );
 
-best_params = ga( @genetic_optimizationevaluator, ...
-    , ... % num constraints
+best_params = ga( @genetic_optimizeridgeevaluator, ...
+    3, ... % num constraints
     [],[],[],[], ...
-    genetic_getbounds( 1 ), ... % lower
-    genetic_getbounds( 2 ), ... % upper
+    [1 1 0.0001], ... % lower
+    [10 450 10], ... % upper
     [], ...
-    genetic_getbounds( -1 ), ... % int constraints
-    options )
-
-
-model = model_getfromvector(best_params);
-
+    [1 2], ... % int constraints
+    options );
 
 end
 

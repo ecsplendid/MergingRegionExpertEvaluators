@@ -3,11 +3,11 @@ corpus_name = 'eeru1206';
 
 [ data, labels, competitor ] = get_corpus( corpus_name );
 
-kernel = @(X,y) kernel_polynomial(X,y,model.degree);
-
 window_size = 200;
 a = 1.24;
 degree = 4;
+
+kernel = @(X,y) kernel_polynomial(X,y,degree);
 
 tic
 % upper triangle of kernel matrix

@@ -5,7 +5,7 @@ function [Losses,Paths] = map_losspath( L )
 
 num_experts = size(L,1);
 T = size(L,2);
-LossPaths = -inf( T, T-1, num_experts );
+LossPaths = -inf( T, T-1, 1 );
 PreviousGuy = -inf( T, T-1, num_experts );
 Paths = nan( T-1, T ); % switches by Times
 LossPaths( 2, 0+1, 1 ) = L(1,2);
