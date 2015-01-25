@@ -1,6 +1,6 @@
 function [ result ] = genetic_getbounds( command )
 %GENETIC_GETBOUNDS Get the bounds of the genetic search algorithm
-%command (0==lower bounds) (1==upperbounds) (3==integers)
+%command (1==lower bounds) (2==upperbounds) (-1==integers)
 
     opt_bounds = [  ...
                 10 400 1; ...             %window_size
