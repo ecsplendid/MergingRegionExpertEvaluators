@@ -6,6 +6,7 @@ function [ score ] = genetic_optimizationevaluator_standard( modelvector )
     %rts1206 is the validation set
     model = model_getfromvector(modelvector, 'rts1206');
     model.AA_mode = 0;
+    mode.truncate = 7000;
     model = execute_regionsalgorithm(model);
     score = model.adjusted_losscs(end);
     

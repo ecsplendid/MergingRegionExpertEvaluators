@@ -5,6 +5,7 @@ function [ score ] = genetic_optimizationevaluator_vs( modelvector )
 
     model = model_getfromvector(modelvector);
     model.AA_mode = 2;
+    mode.truncate = 7000;
     model = execute_regionsalgorithm(model);
     score = model.adjusted_losscs(end);
 end

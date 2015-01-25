@@ -1,15 +1,16 @@
-function [ model ] = execute_regionsalgorithm( model )
+function [ model ] = execute_onlinefixedregions( model )
 
 tic;
 
-[corpus, labels, competitor] = get_corpus( model.corpus_name, model.truncate );
+[corpus, labels, competitor] = ...
+    get_corpus( model.corpus_name, model.truncate );
 
 kernel = @(X,y) kernel_polynomial(X,y,model.degree);
 window_size = model.window_size;
 
-[pred_matrix, ~] = regression_regionevaluators...
+[pred_matrix, ~] = regression_onlinefixedregions...
     ( corpus, labels, kernel, window_size, model.ridge_coeff, ...
-    model.num_expertevaulators, model.maxlag_timehorizon );
+    model.num_expertevaulators );
 
 % we don't issue predictions for 1:window_size as there is no fallback
 % predictor (see thesis)

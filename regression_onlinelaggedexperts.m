@@ -1,9 +1,7 @@
-function [preds, losses] = regression_regionevaluators...
+function [preds, losses] = regression_onlinelaggedexperts...
     ( data, labels, kernel, window_size, ridge_coeff, ...
     num_expertevaulators, maxlag_timehorizon )
 %get_regressionregionevaluators 
-%return a matrix of expert evaulators issuing predictions after their
-%underlying region has been fully revealed. 
 %window_size: the size of the window used to train the kernel ridge
 %regression
 %num_expertevaulators: how many expert evaulators to create
