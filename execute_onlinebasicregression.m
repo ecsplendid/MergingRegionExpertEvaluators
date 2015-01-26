@@ -15,8 +15,9 @@ window_size = model.window_size;
 preds_truncated = preds((window_size+1):end);
 labels_truncated = labels(window_size+1:end);
 
-model.complosses = (competitor - labels').^2;
-model.adjusted_loss = (loss - model.complosses( (window_size+1):end) );
+model.complosses = (competitor((window_size+1):end)...
+    - labels((window_size+1):end)').^2;
+model.adjusted_loss = loss - model.complosses;
 model.adjusted_losscs = cumsum(model.adjusted_loss);
 model.execution_time = toc;
 model.labels = labels_truncated;

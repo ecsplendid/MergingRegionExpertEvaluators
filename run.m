@@ -22,7 +22,6 @@ plot(mfixed.adjusted_losscs,'k');
 
 %% on-line sliding ridge regression
 
-model.num_expertevaluators = 20;
 mbasic = execute_onlinebasicregression(model);
 plot(mbasic.adjusted_losscs,'r');
 grid on;

@@ -19,10 +19,10 @@ labels_truncated = labels(window_size+1:end);
 [L, P, weights] = merge_expertevaluators( pred_matrix_truncated, ...
         labels_truncated, model.alpha, model.AA_mode);
         
-volatility= labels';
-model.complosses = (competitor - volatility).^2;
+model.complosses = (competitor((window_size+1):end)...
+    - labels((window_size+1):end)').^2;
+model.adjusted_loss = L' - model.complosses;
 model.loss = L;
-model.adjusted_loss = (L - model.complosses( (window_size+1):end)' );
 model.adjusted_losscs = cumsum(model.adjusted_loss);
 model.execution_time = toc;
 model.labels = labels_truncated;
