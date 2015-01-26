@@ -1,0 +1,1 @@
+TS: These are the old (slower routines) for RR that don't use the cholesky factors, here for reference purposes

@@ -1,7 +1,7 @@
 %% lagged region merging algorithm
 
 model = region_model;
-model.degree=3;
+model.degree = 3;
 model.ridge_coeff = 2;
 model.window_size = 200;
 model.corpus_name = 'eeru1206';
@@ -9,6 +9,7 @@ model.selection= -1; % 1:5000
 model.maxlag_timehorizon = 4000;
 model.num_expertevaluators = 20;
 mlag = execute_onlinelaggedexperts(model);
+model.alpha = 0.5;
 plot(mlag.adjusted_losscs);
 grid on;
 hold on;

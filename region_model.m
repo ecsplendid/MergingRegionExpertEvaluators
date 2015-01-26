@@ -28,6 +28,8 @@ classdef region_model
         maxlag_timehorizon = 4380;
         % only relevant for variable merged window size algorithm
         window_sizeminimum = 50;
+        % when passed out of a genetic parameter search
+        genetic_model
     end
     
     methods
