@@ -7,7 +7,7 @@ function [ score ] = genetic_optimizationevaluator_lagged( modelvector )
     model = model_getfromvector(modelvector, 'rts1206');
     model.AA_mode = 0;
     model.selection = 4000:8000;
-    model = regression_onlinelaggedexperts(model);
+    model = execute_onlinelaggedexperts(model);
     score = model.adjusted_losscs(end);
     
 end

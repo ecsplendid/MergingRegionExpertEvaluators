@@ -1,6 +1,6 @@
 function [preds, losses] = regression_onlinelaggedexperts...
     ( data, labels, kernel, window_size, ridge_coeff, ...
-    num_expertevaulators, maxlag_timehorizon )
+    num_expertevaluators, maxlag_timehorizon )
 %get_regressionregionevaluators 
 %window_size: the size of the window used to train the kernel ridge
 %regression
@@ -24,11 +24,11 @@ end
 
 lags = floor( ...
         linspace( ...
-            maxlag_timehorizon, 0, num_expertevaulators ...
+            maxlag_timehorizon, 0, num_expertevaluators ...
             ) );
 
-preds = nan( size(data,2), num_expertevaulators );
-losses = nan( size(data,2), num_expertevaulators );
+preds = nan( size(data,2), num_expertevaluators );
+losses = nan( size(data,2), num_expertevaluators );
 
 for t = window_size+1:size(data,2)
     
@@ -52,8 +52,8 @@ for t = window_size+1:size(data,2)
         
         k = kernel(train_window,data(:,t+lag))';
         y = inv_part * k;
-        preds(t+lag, num_expertevaulators-l+1 ) = y;
-        losses(t+lag, num_expertevaulators-l+1 ) = (y-labels(t+lag))^2;
+        preds(t+lag, num_expertevaluators-l+1 ) = y;
+        losses(t+lag, num_expertevaluators-l+1 ) = (y-labels(t+lag))^2;
         
     end
     

@@ -3,7 +3,7 @@ function [ model ] = execute_onlinefixedregions( model )
 tic;
 
 [corpus, labels, competitor] = ...
-    get_corpus( model.corpus_name, model.truncate );
+    get_corpus( model.corpus_name, model.selection );
 
 kernel = @(X,y) kernel_polynomial(X,y,model.degree);
 window_size = model.window_size;
