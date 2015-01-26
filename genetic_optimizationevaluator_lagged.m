@@ -9,7 +9,10 @@ function [ score ] = genetic_optimizationevaluator_lagged( ...
     model.AA_mode = aa_mode;
     model.selection = selection;
     model = execute_onlinelaggedexperts(model);
-    score = model.adjusted_losscs(end);
+    
+    % normalize result by the number of predictions 
+    % (in other words take the mean)
+    score = mean( model.adjusted_losscs );
 
 end
 

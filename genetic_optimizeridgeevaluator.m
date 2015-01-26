@@ -13,6 +13,9 @@ kernel = @(X,y) kernel_polynomial(X,y,degree);
 [~, losses] = regression_basic(...
     corpus, labels, kernel, window_size, a);
 
-score = sum(losses);
+% we need to normalize by the number of predictions (take mean) given
+% otherwise the loss would decrease with increasing window size
+% because we start predicting on window_size + 1
+score = mean( losses );
 
 end
