@@ -1,9 +1,8 @@
-function [score] = genetic_optimizeridgeevaluator( opts )
+function [score] = genetic_optimizeridgeevaluator( ...
+    opts, selection, corpus_name )
 
-% 7.0000  261.0000    2.9117
-corpus_name = 'rts1206';
-
-[corpus, labels, ~] = get_corpus( corpus_name, 8000 );
+[corpus, labels, ~] = get_corpus( ...
+    corpus_name, selection );
 
 degree = opts(1);       % (1) integer {1,2,3,...,10}
 window_size = opts(2);  % (2) integer {1,2,...,450}

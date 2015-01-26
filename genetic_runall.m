@@ -23,3 +23,8 @@ sleeping_experts = 0;
     sleeping_experts, corpus_name, selection, ...
     'SELAGGED', genetic_model );
 
+
+%% ridge regression basic
+
+[ model_rrbasic ] = genetic_executeridgeregression( ...
+    corpus_name, selection, genetic_model);
