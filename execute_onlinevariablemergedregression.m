@@ -1,4 +1,4 @@
-function [ model ] = execute_onlinefixedregions( model )
+function [ model ] = execute_onlinevariablemergedregression( model )
 
 tic;
 
@@ -8,9 +8,9 @@ tic;
 kernel = @(X,y) kernel_polynomial(X,y,model.degree);
 window_size = model.window_size;
 
-[pred_matrix, ~] = regression_onlinefixedregions...
+[pred_matrix, ~] = regression_onlinevariablewindows...
     ( corpus, labels, kernel, window_size, model.ridge_coeff, ...
-    model.num_expertevaluators );
+    model.window_sizeminimum, model.num_expertevaluators );
 
 % we don't issue predictions for 1:window_size as there is no fallback
 % predictor (see thesis)
@@ -29,5 +29,6 @@ model.execution_time = toc;
 model.labels = labels_truncated;
 model.weights = weights;
 model.predictions = P;
+model.pred_matrix = pred_matrix;
 
 end

@@ -9,7 +9,7 @@ window_size = model.window_size;
 
 [pred_matrix, ~] = regression_onlinelaggedexperts...
     ( corpus, labels, kernel, window_size, model.ridge_coeff, ...
-    model.num_expertevaulators, model.maxlag_timehorizon );
+    model.num_expertevaluators, model.maxlag_timehorizon );
 
 % we don't issue predictions for 1:window_size as there is no fallback
 % predictor (see thesis)

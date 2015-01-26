@@ -4,7 +4,7 @@ function [preds, losses] = regression_onlinelaggedexperts...
 %get_regressionregionevaluators 
 %window_size: the size of the window used to train the kernel ridge
 %regression
-%num_expertevaulators: how many expert evaulators to create
+%num_expertevaluators: how many expert evaulators to create
 %maxlag_timehorizon: up to this maximum lag horizon (on a linear mapping from
 %no lag at all)
 

@@ -4,13 +4,13 @@ classdef region_model
      
     properties
         corpus_name = 'eeru1206';
-        degree = 7;
+        degree = 4;
         kernel = @(X,y) kernel_polynomial(X,y,degree);
-        window_size = 239;
-        ridge_coeff = 2;
+        window_size = 208;
+        ridge_coeff = 0.1695;
         % note that if maxlag_timehorizon is too high 
         % you might get experts outputting NaN all the time
-        num_expertevaulators = 72;
+        num_expertevaluators = 47;
         AA_mode = 2;
         alpha = 0.543;
         adjusted_loss = [];
@@ -26,6 +26,8 @@ classdef region_model
         pred_matrix; 
         % only relevant for online lagged algorithm
         maxlag_timehorizon = 4380;
+        % only relevant for variable merged window size algorithm
+        window_sizeminimum = 50;
     end
     
     methods
