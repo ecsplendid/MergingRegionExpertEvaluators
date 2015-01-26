@@ -19,7 +19,7 @@ end
 toc
 
 nregions = floor(size(data,2) / window_size);
-L = nan(nregions,size(data,2));
+L = nan(nregions,nregions);
 
 for e = 1:nregions
     train_region = (e-1)*window_size + (1:window_size);
@@ -28,14 +28,15 @@ for e = 1:nregions
     inv = (U \ (U' \ labels(train_region)'))';
     
     % predict all future regions
-    for j = ((e+1)*window_size) : size(data,2)
-        pred = inv * K(train_region, j);
-        L(e,j) = sum((pred - labels(j)).^2);
+    for j = e+1 : nregions
+        test_region = (j-1)*window_size + (1:window_size);
+        pred = inv * K(train_region, test_region);
+        L(e,j) = sum((pred - labels(test_region)).^2);
     end
 end
 
 %%
-%colormap(hot);
+colormap(hot);
 imagesc(log(L));
 colorbar;
 axis xy;

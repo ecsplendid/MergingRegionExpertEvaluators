@@ -7,7 +7,6 @@ function [ result ] = genetic_getbounds( command )
                 0.001 10 0; ...           %ridge_coeff
                 1 100 1; ...              %num_expertevaulators
                 0 5000 1; ...             %maxlag_timehorizon
-                0.000001 0.999999 0; ...  %alpha
                 1 8 1 ...                 %degree
                 ]; 
       

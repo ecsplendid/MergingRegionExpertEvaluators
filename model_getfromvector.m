@@ -6,8 +6,7 @@ function [ model ] = model_getfromvector( vector, corpus_name )
     model.ridge_coeff = vector(2);
     model.num_expertevaulators = vector(3);
     model.maxlag_timehorizon = vector(4);
-    model.alpha = vector(5);
-    model.degree = vector(6);
+    model.degree = vector(5);
     
     if nargin > 1
         model.corpus_name = corpus_name;

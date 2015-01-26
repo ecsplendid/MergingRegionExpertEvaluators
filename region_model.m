@@ -17,11 +17,13 @@ classdef region_model
         adjusted_losscs = [];
         labels = [];
         execution_time;
-        loss
-        complosses
-        predictions
-        truncate = -1 % truncate at this number of records i.e. 6000
-        weights
+        loss;
+        complosses;
+        predictions;
+        selection = 1:7000; % selection of records (-1 for all)
+        weights;
+        % will have 1:windowsize cut off
+        pred_matrix; 
         % only relevant for online lagged algorithm
         maxlag_timehorizon = 4380;
     end

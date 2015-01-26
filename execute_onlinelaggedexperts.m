@@ -1,8 +1,8 @@
 function [ model ] = execute_onlinelaggedexperts( model )
 
 tic;
-
-[corpus, labels, competitor] = get_corpus( model.corpus_name, model.truncate );
+[corpus, labels, competitor] = get_corpus( ...
+    model.corpus_name, model.selection );
 
 kernel = @(X,y) kernel_polynomial(X,y,model.degree);
 window_size = model.window_size;
@@ -28,5 +28,6 @@ model.execution_time = toc;
 model.labels = labels_truncated;
 model.weights = weights;
 model.predictions = P;
+model.pred_matrix = pred_matrix_truncated;
 
 end
