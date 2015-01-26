@@ -11,7 +11,9 @@ losses = nan( size(data,2), num_expertevaluators );
 
 region_indices = floor( ...
                     linspace( ...
-                        1, size(data,2), num_expertevaluators+1 ...
+                        window_size+1, ... %make first prediction here
+                        size(data,2), ...
+                        num_expertevaluators+1 ...
                         ) );
 
 for r=1:num_expertevaluators-1
@@ -19,7 +21,7 @@ for r=1:num_expertevaluators-1
     % note the first regions might get truncated if window_size >
     % size(data,2)/num_expertevaulators
     region = max(1,... 
-        (region_indices(r+1)-window_size+1)...
+        (region_indices(r+1)-window_size)...
         ):region_indices(r+1)-1;
     
     % might not be same as window_size for first ones
@@ -38,7 +40,7 @@ for r=1:num_expertevaluators-1
         + K);
     inv = (U \ (U' \ labels(region)'))';
         
-    for t = region_indices(r+1):size(data,2)
+    for t = region_indices(r):size(data,2)
 
         k = kernel(data(:,region),data(:,t));
         y = inv * k';
