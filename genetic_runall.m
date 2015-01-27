@@ -8,23 +8,34 @@ variable_share = 2;
 fixed_share = 1;
 sleeping_experts = 0;
 
-% Lagged algorithm, Variable Share
+%% LAGGED REGION MERGING ALGORITHM
+
+% Variable Share
 [ model_vslagged ] = genetic_executelagged( ...
     variable_share, corpus_name, selection, ...
     'VSLAGGED', genetic_model );
 
-% Lagged algorithm, Fixed Share
+% Fixed Share
 [ model_fslagged ] = genetic_executelagged( ...
     fixed_share, corpus_name, selection, ...
     'FSLAGGED', genetic_model );
 
-% Lagged algorithm, Fixed Share
+% Sleeping Share
 [ model_selagged ] = genetic_executelagged( ...
     sleeping_experts, corpus_name, selection, ...
     'SELAGGED', genetic_model );
 
+%% RIDGE REGRESSION BASIC
 
-%% ridge regression basic
-
-[ model_rrbasic ] = genetic_executeridgeregression( ...
+[ model_rrbasic ] = genetic_executefixedregions( ...
     corpus_name, selection, genetic_model);
+
+%% FIXED REGION MERGING ALGORITHM
+
+% Variable Share
+[ model_vslagged ] = genetic_executefixedregions( ...
+    variable_share, corpus_name, selection, ...
+    'VSLAGGED', genetic_model );
+
+
+%% VARIABLE REGION MERGING ALGORITHM

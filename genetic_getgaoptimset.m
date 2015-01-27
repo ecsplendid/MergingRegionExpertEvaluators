@@ -1,8 +1,5 @@
-function [ model ] = genetic_optimizeparams( ...
-    optimization_function, description, genetic_model  )
-%GENETIC_OPTIMIZEPARAMS Find the best set of parameters to fit a model
-%%
-diary on;
+function [ options ] = genetic_getgaoptimset( genetic_model )
+%GET get an options class for the GA (global optimization) routine
 
 options = gaoptimset;
 options = gaoptimset(options,'PopulationSize', genetic_model.PopulationSize );
@@ -22,22 +19,5 @@ options = gaoptimset(options,'PlotFcns', {  ...
 options = gaoptimset(options,'Vectorized', 'off');
 options = gaoptimset(options,'UseParallel', 1 );
 
-best_params = ga( optimization_function, ...
-    length(genetic_getbounds( 1 )), ... % num constraints
-    [],[],[],[], ...
-    genetic_getbounds( 1 ), ...     % lower
-    genetic_getbounds( 2 ), ...     % upper
-    [], ...
-    genetic_getbounds( -1 ), ...    % int constraints
-    options );
-
-% save files
-save( sprintf( './Models/best_params_%s.mat', description ), 'best_params' );
-saveas(gcf,sprintf( './Models/best_params_%s.fig', description ));
-model = model_getfromvector(best_params)
-model.genetic_model = genetic_model;
-save( sprintf( './Models/best_model_%s.mat', description ), 'model' );
-
-diary off;
-
 end
+

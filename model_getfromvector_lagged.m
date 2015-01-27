@@ -7,7 +7,6 @@ function [ model ] = model_getfromvector( vector, corpus_name )
     model.num_expertevaluators = vector(3);
     model.maxlag_timehorizon = vector(4);
     model.degree = vector(5);
-    model.alpha = vector(6);
     
     if nargin > 1
         model.corpus_name = corpus_name;

@@ -12,6 +12,8 @@ model = genetic_optimizeridgeregression( ...
     nested_geneticlagged, ...
     genetic_model  );
 
+model.description = 'sliding ridge_regression';
+
 end
 
 
