@@ -33,15 +33,14 @@ sleeping_experts = 0;
 %% FIXED REGION MERGING ALGORITHM
 
 % Variable Share
-[ model_vslagged ] = genetic_executefixedregions( ...
+[ model_vsfixed ] = genetic_executefixedregions( ...
     variable_share, corpus_name, selection, ...
-    'VSLAGGED', genetic_model );
+    'VSFIXED', genetic_model );
 
 
 %% VARIABLE REGION MERGING ALGORITHM
 
-
 % Variable Share
-[ model_vslagged ] = genetic_executevariable( ...
+[ model_vsvariable ] = genetic_executevariable( ...
     variable_share, corpus_name, selection, ...
-    'VSLAGGED', genetic_model );
+    'VSVAR', genetic_model );

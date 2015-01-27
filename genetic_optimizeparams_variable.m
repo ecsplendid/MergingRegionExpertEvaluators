@@ -1,5 +1,5 @@
 function [ best_params ] = genetic_optimizeparams_variable( ...
-    function_evaluator, description, genetic_model )
+    optimization_function, description, genetic_model )
 %GENETIC_OPTIMIZERIDGEREGRESSION figure out the best parameters for ridge
 % the evaulation set is set inside the nested argument function_evaluator
 % from caller. For brevity this just returns the best_params directly, it's
