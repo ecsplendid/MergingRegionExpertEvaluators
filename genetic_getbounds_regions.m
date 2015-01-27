@@ -4,9 +4,9 @@ function [ result ] = genetic_getbounds_regions( command )
 %command (1==lower bounds) (2==upperbounds) (-1==integers)
 
     opt_bounds = [  ...
-                30 300 1; ...             %(1)window_size
+                30 30  1; ...             %(1)window_size
                 0.1 10 0; ...             %(2)ridge_coeff
-                10 500 1; ...             %(3)num_expertevaluators
+                10 50 1; ...              %(3)num_expertevaluators
                 1 10 1; ...               %(4)degree
                 0 1 0; ...                %(5)alpha
                 ]; 

@@ -3,10 +3,10 @@ function [ result ] = genetic_getbounds_lagged( command )
 %command (1==lower bounds) (2==upperbounds) (-1==integers)
 
     opt_bounds = [  ...
-                10 200 1; ...             %(1)window_size
+                10 50 1; ...              %(1)window_size
                 0.0001 10 0; ...          %(2)ridge_coeff
                 10 100 1; ...             %(3)num_expertevaluators 
-                200 4000 1; ...           %(4)maxlag_timehorizon (check selection)
+                200 400 1; ...            %(4)maxlag_timehorizon (check selection)
                 1 10 1; ...               %(5)degree
                 0 1 0; ...                %(6)alpha
                 ]; 
