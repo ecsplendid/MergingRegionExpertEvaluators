@@ -39,3 +39,9 @@ sleeping_experts = 0;
 
 
 %% VARIABLE REGION MERGING ALGORITHM
+
+
+% Variable Share
+[ model_vslagged ] = genetic_executevariable( ...
+    variable_share, corpus_name, selection, ...
+    'VSLAGGED', genetic_model );
