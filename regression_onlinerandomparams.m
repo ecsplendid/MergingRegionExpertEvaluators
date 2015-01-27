@@ -8,7 +8,7 @@ function [ preds, losses ] = regression_onlinerandomparams( ...
 pred_cells = cell( 1, num_expertevaluators );
 loss_cells = cell( 1, num_expertevaluators );
 
-for e=1:num_expertevaluators
+parfor e=1:num_expertevaluators
     
     ridge_coeff = ridges(floor(rand*length(ridges))+1);
     window_size = window_sizes(floor(rand*length(window_sizes))+1);

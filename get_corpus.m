@@ -19,12 +19,19 @@ end
 
 labels = raw(:,10)';
 
-% cap the signals at 1 to remove outliers
-% could later just remove them entirely?
+% cap the signals at 1 to cap outliers
 labels(labels>1) = 1;
+
+% remove outliers now
+outliers = labels==1;
+labels = labels(~outliers);
+corpus = corpus(:, ~outliers);
+
 
 % the RTSSE competitor predictions
 competitor = raw(:,11)./100;
+
+competitor = competitor(~outliers);
 
     if nargin > 1 && length(selection) > 1
         

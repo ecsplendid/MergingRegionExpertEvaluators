@@ -35,12 +35,11 @@ plot(mfixed.adjusted_losscs,'k');
 grid on;
 %% on-line sliding ridge regression
 
-model.corpus_name = 'rts1206';
-model.selection = 6000:9000;
+model.corpus_name = 'eeru1206';
 model.selection = -1;
-model.degree=6;
-model.window_size = 370;
-model.ridge_coeff = 8.2434;
+model.degree=4;
+model.window_size = 250;
+model.ridge_coeff = 1;
 
 mbasic = execute_onlinebasicregression(model);
 plot(mbasic.adjusted_losscs,'r');
@@ -62,14 +61,17 @@ model.degrees = 1:10;
 model.window_sizes = 50:30:400;
 model.ridges = 0.1:0.5:10;
 model.selection = -1;
-model.num_expertevaluators = 150;
+model.num_expertevaluators = 10;
 model.alpha = 0.8; 
 randmodel = execute_onlinerandommergedregression( model );
 plot(randmodel.adjusted_losscs,'k:');
 
 %%
 
-legend('Lagged Regions', 'Fixed Regions', 'Sliding Ridge Regression', 'Variable Window Merging')
+legend( 'Lagged Regions', ...
+    'Fixed Regions', ...
+    'Sliding Ridge Regression', ...
+    'Variable Window Merging')
 
 %%
 
