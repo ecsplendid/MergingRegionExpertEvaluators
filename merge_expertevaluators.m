@@ -20,6 +20,8 @@ function [losses, preds, weights_saved] = merge_expertevaluators...
 % so this file is a simplification because it contains no semantics for 
 % making the actual predictions, just for sleeping/FS/merging/
 % switching/PWEA stuff
+% note: if you pass in alpha > 1 and use VS you are likely to get a complex
+% result
 
 % the range of possible outcomes:
 A = min(outcomes);

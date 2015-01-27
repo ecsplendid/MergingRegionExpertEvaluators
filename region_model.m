@@ -27,6 +27,10 @@ classdef region_model
         pred_matrix; 
         % only relevant for online lagged algorithm
         maxlag_timehorizon = 4380;
+        % only relevant for the online random regression algorithm
+        degrees = [];
+        ridges = [];
+        window_sizes = [];
         % only relevant for variable merged window size algorithm
         window_sizeminimum = 50;
         % when passed out of a genetic parameter search

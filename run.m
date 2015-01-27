@@ -54,6 +54,19 @@ plot(mvariable.adjusted_losscs,'g');
 
 hold off;
 
+%% random param merged regression
+
+model = region_model;
+model.corpus_name = 'eeru1206';
+model.degrees = 1:10;
+model.window_sizes = 50:30:400;
+model.ridges = 0.1:0.5:10;
+model.selection = -1;
+model.num_expertevaluators = 150;
+model.alpha = 0.8; 
+randmodel = execute_onlinerandommergedregression( model );
+plot(randmodel.adjusted_losscs,'k:');
+
 %%
 
 legend('Lagged Regions', 'Fixed Regions', 'Sliding Ridge Regression', 'Variable Window Merging')
@@ -61,6 +74,6 @@ legend('Lagged Regions', 'Fixed Regions', 'Sliding Ridge Regression', 'Variable 
 %%
 
 [ corpus, labels, competitor ] = get_corpus( ...
-    'rts1206', -1 );
+    'eeru1206', -1 );
 
-plot(labels);
+length(labels)

@@ -1,4 +1,4 @@
-function [ best_params ] = genetic_optimizeparams_ridge( ...
+function [ model ] = genetic_optimizeparams_ridge( ...
     function_evaluator, genetic_model )
 %GENETIC_OPTIMIZERIDGEREGRESSION figure out the best parameters for ridge
 % the evaulation set is set inside the nested argument function_evaluator
@@ -20,8 +20,14 @@ best_params = ga( function_evaluator, ...
     [1 2], ...              % int constraints
     options );
 
-save( './Models/best_params_ridgesimple.mat' , 'best_params' );
 saveas(gcf, './Models/best_params_ridgesimple.fig' );
+
+model = region_model();
+model.degree = best_params(1);
+model.window_size = best_params(2);
+model.ridge_coeff = best_params(3);
+
+save( './Models/best_model_ridgesimple.mat' , 'model' );
 
 diary off;
 
