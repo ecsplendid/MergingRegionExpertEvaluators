@@ -6,7 +6,6 @@ function [ best_params ] = genetic_optimizeparams_ridge( ...
 % reasonably clear that its structure is [ degree, window, ridge ]
 %%
 diary on;
-
 options = genetic_getgaoptimset( genetic_model );
 
 % note that the bounds for this problem are encoded in-place below

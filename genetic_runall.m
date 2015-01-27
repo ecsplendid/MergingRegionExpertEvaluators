@@ -1,8 +1,8 @@
 % run all the genetic searches
 % (note that all the data gets saved in Models/ already automatically)
 
-corpus_name = 'rts1206';
-selection = 4000:8000;
+corpus_name = 'eeru1206';
+selection = 6000:9000;
 genetic_model = genetic_model();
 variable_share = 2;
 fixed_share = 1;
@@ -27,7 +27,7 @@ sleeping_experts = 0;
 
 %% RIDGE REGRESSION BASIC
 
-[ model_rrbasic ] = genetic_executefixedregions( ...
+[ model_rrbasic ] = genetic_executeridgeregression( ...
     corpus_name, selection, genetic_model);
 
 %% FIXED REGION MERGING ALGORITHM
@@ -37,8 +37,7 @@ sleeping_experts = 0;
     variable_share, corpus_name, selection, ...
     'VSFIXED', genetic_model );
 
-
-%% VARIABLE REGION MERGING ALGORITHM
+% VARIABLE REGION MERGING ALGORITHM
 
 % Variable Share
 [ model_vsvariable ] = genetic_executevariable( ...
