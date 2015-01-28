@@ -1,5 +1,5 @@
-function [ model ] = execute_onlinelaggedexperts( model )
-%execute_onlinelaggedexperts merges lagged RR models
+function [ model ] = execute_onlinelaggedlabels( model )
+%execute_onlinelaggedexperts merges lagged labels from the recent past
 
 tic;
 [corpus, labels, competitor] = get_corpus( ...
@@ -8,8 +8,8 @@ tic;
 kernel = @(X,y) kernel_polynomial(X,y,model.degree);
 window_size = model.window_size;
 
-[pred_matrix, ~] = regression_onlinelaggedexperts...
-    ( corpus, labels, kernel, window_size, model.ridge_coeff, ...
+[pred_matrix, ~] = regression_onlinelaggedlabels...
+    ( corpus, labels, ...
     model.num_expertevaluators, model.maxlag_timehorizon );
 
 % we don't issue predictions for 1:window_size as there is no fallback

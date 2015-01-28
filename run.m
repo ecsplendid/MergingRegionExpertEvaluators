@@ -90,3 +90,28 @@ all = results_executeresultsset( 'Skip1_5Gen' );
 batch_generaterandompreds( 'eeru1206', 500 );
 batch_generaterandompreds( 'gaz307', 500 );
 batch_generaterandompreds( 'rts307', 500 );
+
+%% merging lagged previous labels algorithm
+% surpringly (or perhaps encouragingly), this performs terribly and isn't 
+% worth bothering with, weird considering predicting the last record works
+% so well
+
+model = region_model;
+model.corpus_name = 'eeru1206';
+model.selection= 1:10:5000;
+model.maxlag_timehorizon = 10;
+model.num_expertevaluators = 30;
+model.alpha = 0.4;
+model.AA_mode = 2;
+
+mlaglabels = execute_onlinelaggedlabels(model);
+
+plot(mlaglabels.adjusted_losscs);
+grid on;
+
+
+
+%%
+imagesc(mlaglabels.weights)
+
+
