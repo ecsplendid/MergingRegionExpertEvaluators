@@ -1,4 +1,4 @@
-function [preds, losses] = regression_onlinelaggedlabels...
+function [pred_matrix] = regression_onlinelaggedlabels...
     ( corpus, labels, num_expertevaluators, maxlag_timehorizon )
 %regression_onlinelaggedlabels
 %experts are labels in the lagged past
@@ -14,18 +14,14 @@ lags = floor( ...
             2, maxlag_timehorizon, num_expertevaluators ...
             ) );
 
-preds = nan( size(corpus,2), num_expertevaluators );
-losses = nan( size(corpus,2), num_expertevaluators );
-
+pred_matrix = nan( size(corpus,2), num_expertevaluators );
 
 for l=1:length(lags)
     
     lag = lags(l);
 
-    preds(lag:end, l ) = labels(1:end-lag+1)';
-    
+    pred_matrix(lag:end, l ) = labels(1:end-lag+1)';
     
 end
-
 
 end

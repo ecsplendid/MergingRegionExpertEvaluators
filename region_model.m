@@ -35,6 +35,9 @@ classdef region_model
         window_sizeminimum = 50;
         % when passed out of a genetic parameter search
         genetic_model
+        % only relevant for possible labels algorithm
+        label_max = 2;
+        label_min = 0;
     end
     
     methods

@@ -79,7 +79,7 @@ legend( 'Lagged Regions', ...
 [ corpus, labels, competitor ] = get_corpus( ...
     'eeru1206', -1 );
 
-length(labels)
+plot(labels)
 
 %%
 
@@ -110,8 +110,21 @@ plot(mlaglabels.adjusted_losscs);
 grid on;
 
 
+%% merged possible labels algorithm (pipe dream)
 
-%%
-imagesc(mlaglabels.weights)
+model = region_model;
+model.corpus_name = 'eeru1206';
+model.selection= -1;
+model.alpha = 0.3;
+model.AA_mode = 2;
+model.label_min = 0;
+model.label_max = 1;
+model.num_expertevaluators = 1000;
+
+mlaglabels = execute_onlinepossiblelabels(model);
+
+plot(mlaglabels.adjusted_losscs);
+grid on;
+
 
 
