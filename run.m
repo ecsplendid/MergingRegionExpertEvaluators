@@ -37,9 +37,9 @@ grid on;
 
 model.corpus_name = 'eeru1206';
 model.selection = -1;
-model.degree=3;
-model.window_size = 200;
-model.ridge_coeff = 1;
+model.degree = 4;
+model.window_size = 250;
+model.ridge_coeff = 2;
 
 mbasic = execute_onlinebasicregression(model);
 plot(mbasic.adjusted_losscs,'r','LineWidth',2);
@@ -57,14 +57,17 @@ hold off;
 
 model = region_model;
 model.corpus_name = 'eeru1206';
-model.degrees = 1:10;
-model.window_sizes = 20:30:400;
-model.ridges = 0.1:0.5:10;
+model.degrees = 1:7;
+model.window_sizes = 50:30:250;
+model.ridges = 0.1:0.1:10;
 model.selection = -1;
-model.num_expertevaluators = 150;
-model.alpha = 0.8; 
-randmodel = execute_onlinerandommergedregression( model );
+model.num_expertevaluators = 40;
 
+
+%%
+model.AA_mode = 2;
+model.alpha = 0.7; 
+randmodel = execute_onlinerandommergedregression( model,randmodel.pred_matrix  );
 
 plot(randmodel.adjusted_losscs,'k','LineWidth',2);
 grid on
