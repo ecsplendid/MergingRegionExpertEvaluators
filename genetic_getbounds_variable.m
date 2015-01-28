@@ -4,12 +4,12 @@ function [ result ] = genetic_getbounds_variable( command )
 
 
     opt_bounds = [  ...
-                51 100 1; ...            %(1)window_size
+                101 250 1; ...            %(1)window_size
                 0.01 10 0; ...            %(2)ridge_coeff
-                5 50 1; ...               %(3)num_expertevaluators 
-                1 10 1; ...               %(4)degree
+                10 150 1; ...               %(3)num_expertevaluators 
+                1 7 1; ...               %(4)degree
                 0 1 0; ...                %(5)alpha
-                20 50 1; ...              %(6)window_sizeminimum 
+                40 99 1; ...              %(6)window_sizeminimum 
                 ]; 
     
     if command == 1

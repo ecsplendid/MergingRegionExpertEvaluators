@@ -61,9 +61,6 @@ model.window_sizes = 50:30:250;
 model.ridges = 0.1:0.1:10;
 model.selection = -1;
 model.num_expertevaluators = 40;
-
-
-%%
 model.AA_mode = 2;
 model.alpha = 0.7; 
 randmodel = execute_onlinerandommergedregression( model,randmodel.pred_matrix  );
@@ -86,5 +83,5 @@ length(labels)
 
 %%
 
-all = results_executeresultsset( 'Skip10' );
+all = results_executeresultsset( 'Skip10', 10 );
 

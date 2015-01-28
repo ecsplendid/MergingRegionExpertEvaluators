@@ -1,8 +1,8 @@
 % run all the genetic searches
 % (note that all the data gets saved in Models/ already automatically)
 
-corpus_name = 'rts1206';
-selection= 1:10:10126;
+corpus_name = 'eeru1206';
+selection= -1;
 genetic_model = genetic_model();
 variable_share = 2;
 fixed_share = 1;
