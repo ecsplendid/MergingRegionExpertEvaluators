@@ -10,6 +10,7 @@ function [  ] = results_plotall( results_meta )
     plot(set_corpus.Fixed_Sleeping.model.adjusted_losscs,'b')
     title('eeru1206');
     hold off;
+    grid on;
     
     %%
     
@@ -19,6 +20,7 @@ function [  ] = results_plotall( results_meta )
     plot(set_corpus.Lagged_Sleeping.model.adjusted_losscs,'b')
     title('eeru1206');
     hold off;
+    grid on;
     
     %%
     
@@ -28,6 +30,12 @@ function [  ] = results_plotall( results_meta )
     plot(set_corpus.Variable_Sleeping.model.adjusted_losscs,'b')
     title('eeru1206');
     hold off;
-
+    grid on;
+    
+    %%
+    
+    plot(set_corpus.Ridge.model.adjusted_losscs,'k')
+    grid on;
+    
 end
 

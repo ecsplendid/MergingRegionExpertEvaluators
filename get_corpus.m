@@ -35,22 +35,15 @@ end
 
 labels = raw(:,10)';
 
-% remove outliers now
-outliers = labels>41;
-labels = labels(~outliers);
-corpus = corpus(:, ~outliers);
-
 % the RTSSE competitor predictions
 competitor = raw(:,11)./100;
 
-competitor = competitor(~outliers);
+if nargin > 1 && length(selection) > 1
 
-    if nargin > 1 && length(selection) > 1
-        
-        labels = labels(selection);
-        corpus = corpus(:,selection);
-        competitor = competitor(selection);
-    end
+    labels = labels(selection);
+    corpus = corpus(:,selection);
+    competitor = competitor(selection);
+end
 
 end
 

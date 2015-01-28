@@ -15,7 +15,6 @@ mlag = execute_onlinelaggedexperts(model);
 plot(mlag.adjusted_losscs);
 grid on;
 
-
 %% fixed region merging algorithm
             
 model = region_model;
@@ -84,3 +83,8 @@ legend( 'Lagged Regions', ...
     'eeru1206', -1 );
 
 length(labels)
+
+%%
+
+all = results_executeresultsset( 'Skip10' );
+
