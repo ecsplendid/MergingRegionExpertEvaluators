@@ -85,3 +85,8 @@ length(labels)
 
 all = results_executeresultsset( 'Skip10', 10 );
 
+%%
+
+batch_generaterandompreds( 'eeru1206', 500 );
+batch_generaterandompreds( 'gaz307', 500 );
+batch_generaterandompreds( 'rts307', 500 );
