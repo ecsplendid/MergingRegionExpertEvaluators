@@ -37,12 +37,12 @@ grid on;
 
 model.corpus_name = 'eeru1206';
 model.selection = -1;
-model.degree=4;
-model.window_size = 250;
+model.degree=3;
+model.window_size = 200;
 model.ridge_coeff = 1;
 
 mbasic = execute_onlinebasicregression(model);
-plot(mbasic.adjusted_losscs,'r');
+plot(mbasic.adjusted_losscs,'r','LineWidth',2);
 grid on;
 
 %% variable window size merged regression
@@ -58,14 +58,16 @@ hold off;
 model = region_model;
 model.corpus_name = 'eeru1206';
 model.degrees = 1:10;
-model.window_sizes = 50:30:400;
+model.window_sizes = 20:30:400;
 model.ridges = 0.1:0.5:10;
 model.selection = -1;
-model.num_expertevaluators = 10;
+model.num_expertevaluators = 150;
 model.alpha = 0.8; 
 randmodel = execute_onlinerandommergedregression( model );
-plot(randmodel.adjusted_losscs,'k:');
 
+
+plot(randmodel.adjusted_losscs,'k','LineWidth',2);
+grid on
 %%
 
 legend( 'Lagged Regions', ...

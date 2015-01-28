@@ -21,6 +21,8 @@ end
 preds = nan( size(data,2)-window_size, 1 );
 losses = nan( size(data,2)-window_size, 1 );
 
+Wm = nan( window_size+1, window_size+1 );
+
 for t = window_size+1 : size(data,2)
     % here U is the chol factor of aI + K, where
     % K is the kernelmatrix of the window_size many samples just before t.
@@ -40,7 +42,14 @@ for t = window_size+1 : size(data,2)
     % grow
     y = U' \ k;
     z = sqrt(a + kernel(data(:,t), data(:,t)) - y'*y);
-    Wm = [ U y ; zeros(1,window_size) z];
+   % Wm = [ U y ; zeros(1,window_size) z];
+    
+    % faster version -- preallocated
+    Wm( 1:end-1, 1:end-1 ) = U;
+    Wm( 1:end-1, end ) = y;
+    Wm( end, 1:end-1 ) = zeros(1,window_size);
+    Wm( end, end ) = z;
+    
     % shrink
     
     y = Wm(1,2:end);

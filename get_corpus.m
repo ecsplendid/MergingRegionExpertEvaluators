@@ -14,7 +14,7 @@ corpus = raw(:,[7,8,9,19])';
 for r = 1 : size(corpus, 1)
     corpus(r,:) = (corpus(r,:) - ...
         min(corpus(r,:)))/(max(corpus(r,:))-min(corpus(r,:)));
-    corpus(r,:) = (corpus(r,:).*2)-1;
+    corpus(r,:) = (corpus(r,:));
 end
 
 labels = raw(:,10)';
