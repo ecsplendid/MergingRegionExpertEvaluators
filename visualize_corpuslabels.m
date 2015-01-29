@@ -1,4 +1,4 @@
-function [  ] = visualize_corpus( corpus_name )
+function [  ] = visualize_corpuslabels( corpus_name )
 %VISUALIZE_CORPUS Do some plots of the labels in a corpus - will also save them to 
 % /Models/
 %%

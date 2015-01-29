@@ -1,4 +1,5 @@
-function [ corpus, labels, competitor ] = get_corpus( ...
+function [ corpus, labels, competitor, rawstrikes ] ...
+    = get_corpus( ...
     corpus_name, selection, signal_type )
 %get_corpus Load the data from the corpus requested
 % and normalize it
@@ -23,6 +24,9 @@ raw = load(['Data/' corpus_name '.csv']);
 % the first line should be removed in advance
 % cannot specify comma-separated format in this version of MATLAB
 % therefore column 7
+
+
+rawstrikes = raw(:,strike_price)';
 
 corpus = raw(:,signal)';
 
