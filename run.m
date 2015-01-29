@@ -32,13 +32,15 @@ model.selection = -1;
 mfixed = execute_onlinefixedregions(model);
 plot(mfixed.adjusted_losscs,'k');
 grid on;
+
 %% on-line sliding ridge regression
 
-model.corpus_name = 'eeru1206';
+model.corpus_name = 'gaz307';
+   
 model.selection = -1;
-model.degree = 4;
-model.window_size = 250;
-model.ridge_coeff = 2;
+model.degree = 7;
+model.window_size = 355;
+model.ridge_coeff = 7.6997;
 
 mbasic = execute_onlinebasicregression(model);
 plot(mbasic.adjusted_losscs,'r','LineWidth',2);
@@ -55,18 +57,46 @@ hold off;
 %% random param merged regression
 
 model = region_model;
-model.corpus_name = 'eeru1206';
+model.corpus_name = 'gaz307';
+load( sprintf( 'Data/PredMatrix/%s.mat', model.corpus_name ) );
+
 model.degrees = 1:7;
 model.window_sizes = 50:30:250;
 model.ridges = 0.1:0.1:10;
 model.selection = -1;
-model.num_expertevaluators = 40;
-model.AA_mode = 2;
+model.num_expertevaluators = 50;
+model.AA_mode = 0;
 model.alpha = 0.7; 
-randmodel = execute_onlinerandommergedregression( model,randmodel.pred_matrix  );
+rehash = 1;
 
-plot(randmodel.adjusted_losscs,'k','LineWidth',2);
+randmodel = execute_onlinerandommergedregression( model, pred_matrix, rehash );
+
+plot(randmodel.adjusted_losscs,'r','LineWidth',2);
+hold on;
+plot(avmodel.adjusted_losscs,'k','LineWidth',2);
+plot(mbasic.adjusted_losscs,'b','LineWidth',2);
+hold off;
 grid on
+title(model.corpus_name)
+legend(...
+    sprintf('Variable Share Merged Random Params Algorithm (%d)',model.num_expertevaluators), ...
+    'Averaged Random Ridge Regression Models', ...
+    'Optimized Sliding Ridge Regression');
+%plot(randmodel.weights)
+
+%%
+model = region_model;
+model.corpus_name = 'gaz307';
+model.selection = -1;
+load( sprintf( 'Data/PredMatrix/%s.mat', model.corpus_name ) );
+
+[ avmodel ] = execute_onlineaveragedregression( ...
+    model, pred_matrix );
+
+
+plot(avmodel.adjusted_losscs,'k','LineWidth',2);
+grid on;
+
 %%
 
 legend( 'Lagged Regions', ...
@@ -77,7 +107,7 @@ legend( 'Lagged Regions', ...
 %%
 
 [ corpus, labels, competitor ] = get_corpus( ...
-    'eeru1206', -1 );
+    'gaz307', -1 );
 
 plot(labels)
 
@@ -109,7 +139,6 @@ mlaglabels = execute_onlinelaggedlabels(model);
 plot(mlaglabels.adjusted_losscs);
 grid on;
 
-
 %% merged possible labels algorithm (pipe dream)
 
 model = region_model;
@@ -125,6 +154,3 @@ mlaglabels = execute_onlinepossiblelabels(model);
 
 plot(mlaglabels.adjusted_losscs);
 grid on;
-
-
-
