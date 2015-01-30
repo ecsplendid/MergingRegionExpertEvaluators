@@ -4,12 +4,11 @@ function [  ] = visualize_corpusstrikes( corpus_name )
 %%
 
 if nargin == 0
-   corpus_name = 'eeru1206'; 
+   corpus_name = 'gaz307'; 
 end
 
-[ corpus, labels, ~, rawstrikes ] = ...
+[ corpus, labels, ~, rawstrikes, timematurity ] = ...
     get_corpus( corpus_name, -1 );
-
 
 wins = 100;
 window_size = 300;
@@ -17,7 +16,6 @@ window_size = 300;
 region_indices = floor( ...
     linspace(wins+1, length(rawstrikes), wins ) ...
     );
-
 
 hFig = figure(1);
 set(hFig, 'Position', [100 100 500 500])
@@ -35,7 +33,7 @@ for r=1:wins-1
         
     [x, ~] = hist(rawstrikes(region), xvals );
     
-    imap(r,:) = x;
+    imap(r,:) = fliplr(x);
         
 end
 
@@ -43,7 +41,7 @@ imagesc((imap)');
 title(sprintf('Strike Distribution Spectrogram (%s)', corpus_name));
 xlabel('Record Number');
 ylabel('Strike Value');
-set(gca,'YTickLabel', xvals );
+set(gca,'YTickLabel', fliplr(xvals) );
 set(gca,'YTick', 1:length(rawstrikes) );
 
 num_labels = 10;

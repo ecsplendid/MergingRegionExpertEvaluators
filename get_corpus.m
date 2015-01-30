@@ -1,4 +1,4 @@
-function [ corpus, labels, competitor, rawstrikes ] ...
+function [ corpus, labels, competitor, rawstrikes, timematurity ] ...
     = get_corpus( ...
     corpus_name, selection, signal_type )
 %get_corpus Load the data from the corpus requested
@@ -27,6 +27,7 @@ raw = load(['Data/' corpus_name '.csv']);
 
 
 rawstrikes = raw(:,strike_price)';
+timematurity = raw(:,timematurity)';
 
 corpus = raw(:,signal)';
 
