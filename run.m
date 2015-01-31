@@ -54,24 +54,68 @@ plot(mvariable.adjusted_losscs,'g');
 
 hold off;
 
+%% merged random param merged regression (meta merging)
+
+model = region_model;
+model.corpus_name = 'eeru1206';
+load( sprintf( 'Data/PredMatrix/%s.mat', model.corpus_name ) );
+model.window_size= 300;
+model.AA_mode = 2;
+model.num_expertevaluators = 30;
+model.stack_count = 5;
+model.alpha = 1;
+model.selection = -1;
+
+[randstackedmodel] = ...
+        execute_onlinemergedrandommergedregression...
+        ( model, pred_matrix );
+
+plot(randstackedmodel.adjusted_losscs,'r','LineWidth',2);
+grid on
+[ randstackedmodel.results_adjustedlosssum ...
+    randstackedmodel.results_adjustedlossmedian ]
+
+%% averaged random param merged regression
+
+model = region_model;
+model.corpus_name = 'eeru1206';
+load( sprintf( 'Data/PredMatrix/%s.mat', model.corpus_name ) );
+model.stack_count = 5;
+model.alpha = 1;
+model.selection = -1;
+model.num_expertevaluators = 30;
+
+[randstackedmodel] = ...
+        execute_onlineaveragerandommergedregression...
+        ( model, pred_matrix );
+
+plot(randstackedmodel.adjusted_losscs,'r','LineWidth',2);
+grid on
+[ randstackedmodel.results_adjustedlosssum ...
+    randstackedmodel.results_adjustedlossmedian ]
+    
 %% random param merged regression
 
 model = region_model;
-model.corpus_name = 'gaz307';
+model.corpus_name = 'rts307';
 load( sprintf( 'Data/PredMatrix/%s.mat', model.corpus_name ) );
 
 model.degrees = 1:7;
 model.window_sizes = 50:30:250;
 model.ridges = 0.1:0.1:10;
 model.selection = -1;
-model.num_expertevaluators = 50;
-model.AA_mode = 0;
+model.num_expertevaluators = 150;
+model.AA_mode = 2;
 model.alpha = 0.7; 
 rehash = 1;
 
-randmodel = execute_onlinerandommergedregression( model, pred_matrix, rehash );
+[randmodel, first_prediction ] = ...
+        execute_onlinerandommergedregression( model, pred_matrix );
 
 plot(randmodel.adjusted_losscs,'r','LineWidth',2);
+
+
+%%
 hold on;
 plot(avmodel.adjusted_losscs,'k','LineWidth',2);
 plot(mbasic.adjusted_losscs,'b','LineWidth',2);
@@ -86,13 +130,12 @@ legend(...
 
 %%
 model = region_model;
-model.corpus_name = 'gaz307';
+model.corpus_name = 'eeru1206';
 model.selection = -1;
 load( sprintf( 'Data/PredMatrix/%s.mat', model.corpus_name ) );
 
 [ avmodel ] = execute_onlineaveragedregression( ...
     model, pred_matrix );
-
 
 plot(avmodel.adjusted_losscs,'k','LineWidth',2);
 grid on;
@@ -127,9 +170,9 @@ batch_generaterandompreds( 'rts307', 500 );
 % so well
 
 model = region_model;
-model.corpus_name = 'eeru1206';
-model.selection= 1:10:5000;
-model.maxlag_timehorizon = 10;
+model.corpus_name = 'rts307';
+model.selection= -1;
+model.maxlag_timehorizon = 40;
 model.num_expertevaluators = 30;
 model.alpha = 0.4;
 model.AA_mode = 2;
@@ -144,11 +187,11 @@ grid on;
 model = region_model;
 model.corpus_name = 'eeru1206';
 model.selection= -1;
-model.alpha = 0.3;
+model.alpha = 0.4;
 model.AA_mode = 2;
 model.label_min = 0;
 model.label_max = 1;
-model.num_expertevaluators = 1000;
+model.num_expertevaluators = 100;
 
 mlaglabels = execute_onlinepossiblelabels(model);
 

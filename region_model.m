@@ -38,6 +38,11 @@ classdef region_model
         % only relevant for possible labels algorithm
         label_max = 2;
         label_min = 0;
+        % only relevant for execute_onlinerandommergedregression
+        stack_count = 10;
+        % results that we use
+        results_adjustedlosssum
+        results_adjustedlossmedian
     end
     
     methods

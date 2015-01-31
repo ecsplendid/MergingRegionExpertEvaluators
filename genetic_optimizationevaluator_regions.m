@@ -11,7 +11,7 @@ function [ score ] = genetic_optimizationevaluator_regions( ...
     
     % normalize result by the number of predictions 
     % (in other words take the mean)
-    score = mean( model.adjusted_losscs );
+    score = median( model.adjusted_losscs );
 
 end
 

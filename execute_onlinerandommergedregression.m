@@ -1,5 +1,5 @@
-function [ model ] = execute_onlinerandommergedregression( ...
-    model, pred_matrix, rehash )
+function [ model, first_prediction ] = execute_onlinerandommergedregression( ...
+    model, pred_matrix )
 %execute_onlinerandommergedregression execute the random merged regression
 %algorithm 
 %pred_matrix: pass in a pre-computed predmatrix
@@ -14,22 +14,15 @@ if nargin < 2
         ( corpus, labels, ...
         model.window_sizes, model.ridges, model.degrees, ...
         model.num_expertevaluators );
-else
-    % assume pred_matrix has 500 experts in like the ones I pregenerated
-    pred_matrix_new = zeros( length(labels), model.num_expertevaluators );
     
-    for i=1:rehash
-        pred_matrix_new = ( pred_matrix_new + ...
-            pred_matrix(:, randperm( 500, model.num_expertevaluators) ) );
-    end
-    
-    pred_matrix_new(pred_matrix_new==0) = nan;
-    
-    pred_matrix  = pred_matrix_new./rehash;
-    
+else 
+     pred_matrix = ...
+         pred_matrix(:, randperm( 500, model.num_expertevaluators) );
 end
 
 last_nan = max(find(isnan(pred_matrix(:,1))));
+
+first_prediction = (last_nan+1);
 
 % we don't issue predictions for 1:window_size as there is no fallback
 % predictor (see thesis)
