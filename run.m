@@ -27,7 +27,6 @@ model.degree = 9;
 model.alpha = 0.9;
 model.AA_mode = 2;
 
-%%
 model.selection = -1;
 mfixed = execute_onlinefixedregions(model);
 plot(mfixed.adjusted_losscs,'k');
@@ -42,9 +41,18 @@ model.degree = 7;
 model.window_size = 355;
 model.ridge_coeff = 7.6997;
 
+hFig = figure(1);
+set(hFig, 'Position', [600 1 400 400]);
 mbasic = execute_onlinebasicregression(model);
-plot(mbasic.adjusted_losscs,'r','LineWidth',2);
+plot(mbasic.adjusted_losscs,'k','LineWidth',2);
+title( sprintf( 'Ridge regression on %s', model.corpus_name ) );
+xlabel('Record Number');
+ylabel('Cumulative Adjusted Deviation');
+axis square;
 grid on;
+print(gcf, '-depsc2', ...
+    sprintf(  'Figures/ridge_regression_%s.eps', model.corpus_name ) );
+
 
 %% variable window size merged regression
 
@@ -57,14 +65,15 @@ hold off;
 %% merged random param merged regression (meta merging)
 
 model = region_model;
-model.corpus_name = 'eeru1206';
-load( sprintf( 'Data/PredMatrix/%s.mat', model.corpus_name ) );
 model.window_size= 300;
 model.AA_mode = 2;
-model.num_expertevaluators = 30;
-model.stack_count = 5;
-model.alpha = 1;
+model.num_expertevaluators = 119;
+model.stack_count = 8;
+model.alpha = 0.9901;
+
 model.selection = -1;
+model.corpus_name = 'gaz307';
+load( sprintf( 'Data/PredMatrix/%s.mat', model.corpus_name ) );
 
 [randstackedmodel] = ...
         execute_onlinemergedrandommergedregression...
@@ -78,12 +87,13 @@ grid on
 %% averaged random param merged regression
 
 model = region_model;
-model.corpus_name = 'eeru1206';
+model.corpus_name = 'rts307';
 load( sprintf( 'Data/PredMatrix/%s.mat', model.corpus_name ) );
-model.stack_count = 5;
-model.alpha = 1;
+model.stack_count = 17;
+model.alpha = 0.8647;
 model.selection = -1;
-model.num_expertevaluators = 30;
+model.num_expertevaluators = 40;
+model.window_size = 400;
 
 [randstackedmodel] = ...
         execute_onlineaveragerandommergedregression...

@@ -19,7 +19,7 @@ best_params = ga( optimization_function, ...
 % save files
 save( sprintf( './Models/best_params_%s.mat', description ), 'best_params' );
 saveas(gcf,sprintf( './Models/best_params_%s.fig', description ));
-model = model_getfromvector_lagged(best_params)
+model = model_getfromvector_metamerged(best_params)
 model.genetic_model = genetic_model;
 save( sprintf( './Models/best_model_%s.mat', description ), 'model' );
 

@@ -13,4 +13,3 @@ function [ model ] = model_getfromvector_lagged( vector, corpus_name )
         model.corpus_name = corpus_name;
     end
 end
-

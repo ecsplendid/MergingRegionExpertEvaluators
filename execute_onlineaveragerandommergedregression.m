@@ -18,9 +18,8 @@ for i=1:model.stack_count
 
 end
 
-% Models start predicting from a random windowsize, all of which 
-% are less than 300
-predict_from = 301;
+% Models start predicting from a random windowsize
+predict_from = model.window_size+1;
 
 model.complosses = (competitor(predict_from:end) - labels(predict_from:end)').^2;
 
